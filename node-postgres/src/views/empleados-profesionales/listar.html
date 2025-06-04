@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Empleados Profesionales - Museo de Arte</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #fdfdfd;
+    }
+    .table th {
+      background-color: #d32f2f;
+      color: white;
+    }
+    .container {
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1 class="text-center mb-4">Listado de Empleados Profesionales</h1>
+    <div class="d-flex justify-content-between mb-3">
+      <a href="/views/empleados-profesionales/crear.html" class="btn btn-success">+ Agregar Empleado</a>
+      <input type="text" id="buscarEmpleadoProfesional" class="form-control w-25" placeholder="Buscar por nombre...">
+    </div>
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Primer Nombre</th>
+          <th>Segundo Nombre</th>
+          <th>Primer Apellido</th>
+          <th>Segundo Apellido</th>
+          <th>Documento de Identidad</th>
+          <th>Sexo</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="tablaEmpleadosProfesionales">
+        <!-- Contenido dinámico -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      fetch('/api/empleados-profesionales')
+        .then(res => res.json())
+        .then(data => {
+          const tabla = document.getElementById('tablaEmpleadosProfesionales');
+          data.forEach(emp => {
+            const fila = document.createElement('tr');
+            fila.innerHTML = `
+              <td>${emp.id_empleado_profesional}</td>
+              <td>${emp.primer_nombre} ${emp.segundo_nombre || ''}</td>
+              <td>${emp.primer_apellido} ${emp.segundo_apellido || ''}</td>
+              <td>${emp.doc_identidad}</td>
+              <td>${emp.sexo}</td>
+              <td>
+                <a href="/views/empleados/editar.html?id=${emp.id_empleado}" class="btn btn-sm btn-warning">Editar</a>
+                <button class="btn btn-sm btn-danger" onclick="eliminarEmpleadoProfesional(${emp.id_empleado_profesional})">Eliminar</button>
+              </td>
+            `;
+            tabla.appendChild(fila);
+          });
+        });
+    });
+
+    function eliminarEmpleadoProfesional(id) {
+      if (confirm('¿Estás seguro de eliminar este empleado?')) {
+        fetch(`/api/empleados-profesionales/${id}`, { method: 'DELETE' })
+          .then(() => location.reload());
+      }
+    }
+  </script>
+</body>
+</html>

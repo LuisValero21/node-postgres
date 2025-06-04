@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registrar Empleado Profesional</title>
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container mt-4">
+    <h2>Registrar Nuevo Empleado</h2>
+    <form id="formEmpleadoProfesional" method="POST" action="/api/empleados-profesionales">
+      <div class="mb-3">
+        <label for="primer_nombre" class="form-label">Primer Nombre</label>
+        <input type="text" class="form-control" id="primer_nombre" name="primer_nombre" required>
+      </div>
+      <div class="mb-3">
+        <label for="segundo_nombre" class="form-label">Segundo Nombre</label>
+        <input type="text" class="form-control" id="segundo_nombre" name="segundo_nombre">
+      </div>
+      <div class="mb-3">
+        <label for="primer_apellido" class="form-label">Primer Apellido</label>
+        <input type="text" class="form-control" id="primer_apellido" name="primer_apellido" required>
+      </div>
+      <div class="mb-3">
+        <label for="segundo_apellido" class="form-label">Segundo Apellido</label>
+        <input type="text" class="form-control" id="segundo_apellido" name="segundo_apellido">
+      </div>
+      <div class="mb-3">
+        <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
+        <input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" required>
+      </div>
+      <div class="mb-3">
+        <label for="doc_identidad" class="form-label">Documento de Identidad</label>
+        <input type="number" class="form-control" id="doc_identidad" name="doc_identidad" required>
+      </div>
+      <div class="mb-3">
+        <label for="sexo" class="form-label">Sexo</label>
+        <select class="form-select" id="sexo" name="sexo" required>
+          <option value="">Seleccione...</option>
+          <option value="M">Masculino</option>
+          <option value="F">Femenino</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="id_lugar" class="form-label">Lugar de Nacimiento</label>
+        <select class="form-select" id="id_lugar" name="id_lugar" required>
+          <!-- Opciones serán cargadas dinámicamente -->
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Registrar</button>
+      <a href="/empleados-profesionales/listar" class="btn btn-secondary">Volver</a>
+    </form>
+  </div>
+  <script src="/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/empleados-profesionales/crear.js"></script>
+</body>
+</html>
