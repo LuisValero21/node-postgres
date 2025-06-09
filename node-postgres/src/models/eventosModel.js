@@ -1,43 +1,39 @@
 const pool = require('../db');
 
 const obtenerEventos = async () => {
-  const result = await pool.query('SELECT * FROM eventos ORDER BY fecha_inicio DESC');
+  const result = await pool.query('SELECT * FROM eventos ORDER BY fecha_inicio_evento DESC');
   return result.rows;
 };
 
-const obtenerEventoPorId = async (id) => {
-  const result = await pool.query('SELECT * FROM eventos WHERE id = $1', [id]);
-  return result.rows[0];
-};
+const crearEvento = async ({
+  titulo_evento,
+  fecha_inicio_evento,
+  fecha_fin_evento,
+  costo_evento,
+  cantidad_personas_invitadas_evento,
+  nombre_instituto_evento
+}) => {
+  const id_museo_evento = 1; // de momento hardcoded
 
-const crearEvento = async ({ nombre, descripcion, fecha_inicio, fecha_fin, tipo_evento }) => {
   const result = await pool.query(
-    `INSERT INTO eventos (nombre, descripcion, fecha_inicio, fecha_fin, tipo_evento)
-     VALUES ($1, $2, $3, $4, $5) RETURNING *`,
-    [nombre, descripcion, fecha_inicio, fecha_fin, tipo_evento]
+    `INSERT INTO eventos (
+      id_evento, id_museo_evento, titulo_evento, fecha_inicio_evento,
+      fecha_fin_evento, costo_evento, cantidad_personas_invitadas_evento, nombre_instituto_evento
+    ) VALUES (
+      DEFAULT, $1, $2, $3, $4, $5, $6, $7
+    ) RETURNING *`,
+    [
+      id_museo_evento,
+      titulo_evento,
+      fecha_inicio_evento,
+      fecha_fin_evento,
+      costo_evento,
+      cantidad_personas_invitadas_evento,
+      nombre_instituto_evento
+    ]
   );
+
   return result.rows[0];
 };
 
-const actualizarEvento = async (id, { nombre, descripcion, fecha_inicio, fecha_fin, tipo_evento }) => {
-  const result = await pool.query(
-    `UPDATE eventos
-     SET nombre = $1, descripcion = $2, fecha_inicio = $3, fecha_fin = $4, tipo_evento = $5
-     WHERE id = $6 RETURNING *`,
-    [nombre, descripcion, fecha_inicio, fecha_fin, tipo_evento, id]
-  );
-  return result.rows[0];
-};
-
-const eliminarEvento = async (id) => {
-  const result = await pool.query('DELETE FROM eventos WHERE id = $1 RETURNING *', [id]);
-  return result.rows[0];
-};
-
-module.exports = {
-  obtenerEventos,
-  obtenerEventoPorId,
-  crearEvento,
-  actualizarEvento,
-  eliminarEvento
-};
+module.exports = { obtenerEventos, crearEvento };

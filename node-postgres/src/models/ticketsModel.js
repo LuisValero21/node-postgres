@@ -1,59 +1,30 @@
 const pool = require('../db');
 
 const obtenerTiposTicket = async () => {
-  const result = await pool.query('SELECT * FROM tipos_tickets ORDER BY nombre');
+  const result = await pool.query('SELECT * FROM tipos_tickets ORDER BY tipo_tipo_ticket');
   return result.rows;
 };
 
-const crearTipoTicket = async ({ nombre, precio }) => {
+const crearTipoTicket = async ({ fecha_inicio, fecha_fin, tipo, precio, id_museo }) => {
   const result = await pool.query(
-    `INSERT INTO tipos_tickets (nombre, precio)
-     VALUES ($1, $2) RETURNING *`,
-    [nombre, precio]
+    `INSERT INTO tipos_tickets (fecha_inicio_tipo_ticket, fecha_fin_tipo_ticket, tipo_tipo_ticket, precio_tipo_ticket, id_museo_tipo_ticket)
+     VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+    [fecha_inicio, fecha_fin, tipo, precio, id_museo]
   );
   return result.rows[0];
 };
 
-const actualizarTipoTicket = async (id, { nombre, precio }) => {
+const registrarVentaTicket = async ({ id_museo, tipo_entrada, monto }) => {
   const result = await pool.query(
-    `UPDATE tipos_tickets
-     SET nombre = $1, precio = $2
-     WHERE id = $3 RETURNING *`,
-    [nombre, precio, id]
+    `INSERT INTO tickets (id_ticket, id_museo_ticket, fecha_hora_venta_ticket, tipo_entrada_ticket, monto_ticket)
+     VALUES (DEFAULT, $1, NOW(), $2, $3) RETURNING *`,
+    [id_museo, tipo_entrada, monto]
   );
   return result.rows[0];
-};
-
-const eliminarTipoTicket = async (id) => {
-  const result = await pool.query('DELETE FROM tipos_tickets WHERE id = $1 RETURNING *', [id]);
-  return result.rows[0];
-};
-
-const registrarVentaTicket = async ({ id_tipo_ticket, cantidad, fecha_venta }) => {
-  const result = await pool.query(
-    `INSERT INTO ventas_tickets (id_tipo_ticket, cantidad, fecha_venta)
-     VALUES ($1, $2, $3) RETURNING *`,
-    [id_tipo_ticket, cantidad, fecha_venta]
-  );
-  return result.rows[0];
-};
-
-const obtenerHistorialVentas = async () => {
-  const result = await pool.query(
-    `SELECT v.id, t.nombre AS tipo_ticket, v.cantidad, v.fecha_venta, t.precio,
-            (v.cantidad * t.precio) AS total
-     FROM ventas_tickets v
-     JOIN tipos_ticket t ON v.id_tipo_ticket = t.id
-     ORDER BY v.fecha_venta DESC`
-  );
-  return result.rows;
 };
 
 module.exports = {
   obtenerTiposTicket,
   crearTipoTicket,
-  actualizarTipoTicket,
-  eliminarTipoTicket,
-  registrarVentaTicket,
-  obtenerHistorialVentas
+  registrarVentaTicket
 };

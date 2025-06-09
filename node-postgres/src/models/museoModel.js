@@ -1,0 +1,43 @@
+const pool = require('../db'); // Asegúrate de tener src/db/index.js configurado
+
+// Obtener todos los museos
+exports.getAll = async () => {
+  const result = await pool.query('SELECT * FROM museos ORDER BY id_museo');
+  return result.rows;
+};
+
+// Obtener un museo por ID
+exports.getById = async (id) => {
+  const result = await pool.query('SELECT * FROM museos WHERE id_museo = $1', [id]);
+  return result.rows[0];
+};
+
+// Crear un nuevo museo
+exports.create = async (data) => {
+  const { nombre, direccion, ciudad, pais, telefono } = data;
+  const result = await pool.query(
+    `INSERT INTO museos (nombre, direccion, ciudad, pais, telefono)
+     VALUES ($1, $2, $3, $4, $5)
+     RETURNING *`,
+    [nombre, direccion, ciudad, pais, telefono]
+  );
+  return result.rows[0];
+};
+
+// Actualizar un museo
+exports.update = async (id, data) => {
+  const { nombre, direccion, ciudad, pais, telefono } = data;
+  const result = await pool.query(
+    `UPDATE museos
+     SET nombre = $1, direccion = $2, ciudad = $3, pais = $4, telefono = $5
+     WHERE id_museo = $6`,
+    [nombre, direccion, ciudad, pais, telefono, id]
+  );
+  return result.rowCount > 0;
+};
+
+// Eliminar un museo
+exports.remove = async (id) => {
+  const result = await pool.query('DELETE FROM museos WHERE id_museo = $1', [id]);
+  return result.rowCount > 0;
+};
