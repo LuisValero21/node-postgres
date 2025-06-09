@@ -10,35 +10,61 @@
 <body>
   <div class="container mt-5">
     <h2 class="mb-4">Registro de Estructura Organizacional</h2>
+
     <form id="formEstructuraOrganizacional">
+      <!-- NOMBRE -->
       <div class="mb-3">
-        <label for="nombreUnidad" class="form-label">Nombre de la Unidad</label>
-        <input type="text" class="form-control" id="nombreUnidad" name="nombre_unidad" required>
+        <label for="nombre" class="form-label">Nombre de la Unidad</label>
+        <input type="text" class="form-control" id="nombre" name="nombre_estructura_organizacional" required maxlength="50">
       </div>
+
+      <!-- TIPO (CHECK SQL) -->
       <div class="mb-3">
-        <label for="tipoUnidad" class="form-label">Tipo de Unidad</label>
-        <select class="form-select" id="tipoUnidad" name="tipo_unidad" required>
+        <label for="tipo" class="form-label">Tipo de Unidad</label>
+        <select class="form-select" id="tipo" name="tipo_estructura_organizacional" required>
           <option value="">Seleccione</option>
-          <option value="Departamento">Departamento</option>
-          <option value="División">División</option>
-          <option value="Área">Área</option>
+          <option value="direccion">Dirección</option>
+          <option value="departamento">Departamento</option>
+          <option value="subdepartamento">Subdepartamento</option>
+          <option value="subseccion">Subsección</option>
         </select>
       </div>
+
+      <!-- NIVEL -->
+      <div class="mb-3">
+        <label for="nivel" class="form-label">Nivel de la Unidad</label>
+        <input type="number" class="form-control" id="nivel" name="nivel_estructura_organizacional" required min="1" max="9">
+      </div>
+
+      <!-- DESCRIPCIÓN -->
       <div class="mb-3">
         <label for="descripcion" class="form-label">Descripción</label>
-        <textarea class="form-control" id="descripcion" name="descripcion" rows="3"></textarea>
+        <textarea class="form-control" id="descripcion" name="descripcion_estructura_organizacional" rows="3" maxlength="100" required></textarea>
       </div>
+
+      <!-- MUSEO -->
       <div class="mb-3">
-        <label for="unidadSuperior" class="form-label">Unidad Superior</label>
-        <select class="form-select" id="unidadSuperior" name="unidad_superior">
-          <option value="">Ninguna</option>
-          <!-- Se cargan dinámicamente las unidades superiores existentes -->
+        <label for="museo" class="form-label">Museo</label>
+        <select class="form-select" id="museo" name="id_museo_estructura_organizacional" required>
+          <!-- Opciones cargadas dinámicamente -->
         </select>
       </div>
+
+      <!-- UNIDAD SUPERIOR (opcional) -->
+      <div class="mb-3">
+        <label for="unidadSuperior" class="form-label">Unidad Superior (opcional)</label>
+        <select class="form-select" id="unidadSuperior" name="id_gerencia_estructura_organizacional">
+          <option value="">Ninguna</option>
+          <!-- Opciones cargadas dinámicamente -->
+        </select>
+        <input type="hidden" id="id_gerencia_museo_estructura_organizacional" name="id_gerencia_museo_estructura_organizacional" />
+      </div>
+
       <button type="submit" class="btn btn-primary">Guardar Unidad</button>
       <a href="/views/index.html" class="btn btn-secondary">Cancelar</a>
     </form>
   </div>
+
   <script src="/js/estructuras/organizacionales.js"></script>
 </body>
 </html>
