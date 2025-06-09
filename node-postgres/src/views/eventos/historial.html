@@ -13,20 +13,34 @@
     <table class="table table-hover table-bordered">
       <thead class="table-light">
         <tr>
-          <th>Nombre</th>
-          <th>Tipo</th>
+          <th>Título</th>
           <th>Fecha Inicio</th>
           <th>Fecha Fin</th>
-          <th>Ubicación</th>
-          <th>Descripción</th>
-          <th>Acciones</th>
+          <th>Costo</th>
+          <th>Invitados</th>
+          <th>Instituto</th>
         </tr>
       </thead>
-      <tbody id="tablaEventos">
-        <!-- Filas generadas dinámicamente -->
+      <tbody>
+        <% if (eventos.length > 0) { %>
+          <% eventos.forEach(evento => { %>
+            <tr>
+              <td><%= evento.titulo_evento %></td>
+              <td><%= evento.fecha_inicio_evento.toISOString().split('T')[0] %></td>
+              <td><%= evento.fecha_fin_evento.toISOString().split('T')[0] %></td>
+              <td><%= evento.costo_evento !== null ? `$${evento.costo_evento.toFixed(2)}` : '—' %></td>
+              <td><%= evento.cantidad_personas_invitadas_evento || '—' %></td>
+              <td><%= evento.nombre_instituto_evento || '—' %></td>
+            </tr>
+          <% }); %>
+        <% } else { %>
+          <tr>
+            <td colspan="6" class="text-center">No hay eventos registrados.</td>
+          </tr>
+        <% } %>
       </tbody>
     </table>
+    <a href="/eventos/registrar" class="btn btn-primary">Registrar nuevo evento</a>
   </div>
-  <script src="/js/eventos/historial.js"></script>
 </body>
 </html>
