@@ -16,13 +16,48 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarContent">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="/views/empleados-profesionales/listar.html">RRHH</a></li>
-          <li class="nav-item"><a class="nav-link" href="/views/estructuras/fisicas.html">Estructura</a></li>
-          <li class="nav-item"><a class="nav-link" href="/views/obras/registrar.html">Obras</a></li>
-          <li class="nav-item"><a class="nav-link" href="/views/eventos/registrar.html">Eventos</a></li>
-          <li class="nav-item"><a class="nav-link" href="/views/tickets/venta.html">Tickets</a></li>
-          <li class="nav-item"><a class="nav-link" href="/views/historiales-mantenimientos/registrar.html">Historial Mantenimiento</a></li>
+        <ul class="navbar-nav ms-auto d-flex align-items-center">
+          <li class="nav-item">
+            <a href="/empleados-profesionales/listar" class="btn btn-outline-primary mx-1">Recursos Humanos</a>
+          </li>
+          <!-- Dropdown para Estructura del Museo -->
+          <li class="nav-item dropdown">
+            <a class="btn btn-outline-primary dropdown-toggle mx-1" href="#" role="button" data-bs-toggle="dropdown">Estructura del Museo</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/estructuras/fisicas">Estructura Física</a></li>
+              <li><a class="dropdown-item" href="/estructuras/organizacionales">Estructura Organizacional</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="/obras/registrar" class="btn btn-outline-primary mx-1">Obras de Arte</a>
+          </li>
+          <li class="nav-item">
+            <a href="/artistas" class="btn btn-outline-primary mx-1">Artistas</a>
+          </li>
+          <li class="nav-item">
+            <a href="/colecciones" class="btn btn-outline-primary mx-1">Colecciones</a>
+          </li>
+          <li class="nav-item">
+            <a href="/eventos/registrar" class="btn btn-outline-primary mx-1">Eventos y Exposiciones</a>
+          </li>
+          <li class="nav-item">
+            <a href="/salas-exposiciones/listar" class="btn btn-outline-primary mx-1">Salas de Exposición</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="btn btn-outline-primary dropdown-toggle mx-1" href="#" role="button" data-bs-toggle="dropdown">Formularios</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/formularios/resumen-museo">Resumen Histórico del Museo</a></li>
+              <li><a class="dropdown-item" href="/formularios/empleado-nuevo">Expediente de un Empleado Nuevo</a></li>
+              <li><a class="dropdown-item" href="/formularios/pintura-nueva">Registro de Pinturas</a></li>
+              <li><a class="dropdown-item" href="/formularios/escultura-nueva">Registro de Esculturas</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="/tickets/venta" class="btn btn-outline-primary mx-1">Administración de Tickets</a>
+          </li>
+          <li class="nav-item">
+            <a href="/historiales-mantenimientos/registrar" class="btn btn-outline-primary mx-1">Historial Mantenimiento</a>
+          </li>
         </ul>
       </div>
     </div>
@@ -32,26 +67,44 @@
   <header class="bg-light py-4 text-center">
     <div class="container">
       <h1 class="display-5 fw-bold">Sistema de Gestión del Museo</h1>
-      <p class="lead">Administra obras, personal, exposiciones y más, desde un solo lugar.</p>
+      <p class="lead">Administra obras, artistas, personal, exposiciones y más, desde un solo lugar.</p>
     </div>
   </header>
 
-  <!-- Contenido principal con menú lateral -->
+  <!-- Contenido principal -->
   <main class="container-fluid my-4">
     <div class="row">
       <!-- Menú lateral -->
       <aside class="col-md-3 mb-4">
         <div class="list-group shadow-sm">
-          <a href="/views/empleados-profesionales/listar.html" class="list-group-item list-group-item-action">Recursos Humanos</a>
-          <a href="/views/estructuras/fisicas.html" class="list-group-item list-group-item-action">Estructura del Museo</a>
-          <a href="/views/obras/registrar.html" class="list-group-item list-group-item-action">Obras de Arte</a>
-          <a href="/views/eventos/registrar.html" class="list-group-item list-group-item-action">Eventos y Exposiciones</a>
-          <a href="/views/tickets/venta.html" class="list-group-item list-group-item-action">Administración de Tickets</a>
-          <a href="/views/historiales-mantenimientos/registrar.html" class="list-group-item list-group-item-action">Historial Mantenimiento</a>
+          <a href="/empleados-profesionales/listar" class="list-group-item list-group-item-action">Recursos Humanos</a>
+          <div class="list-group-item">
+            <strong>Estructura del Museo</strong>
+            <div class="list-group ms-2">
+              <a href="/estructuras/fisicas" class="list-group-item list-group-item-action">↳ Física</a>
+              <a href="/estructuras/organizacionales" class="list-group-item list-group-item-action">↳ Organizacional</a>
+            </div>
+          </div>
+          <a href="/obras/registrar" class="list-group-item list-group-item-action">Obras de Arte</a>
+          <a href="/artistas" class="list-group-item list-group-item-action">Artistas</a>
+          <a href="/colecciones" class="list-group-item list-group-item-action">Colecciones</a>
+          <a href="/eventos/registrar" class="list-group-item list-group-item-action">Eventos y Exposiciones</a>
+          <a href="/salas-exposiciones/listar" class="list-group-item list-group-item-action">Salas de Exposición</a>
+          <div class="list-group-item">
+            <strong>Formularios</strong>
+            <div class="list-group ms-2">
+              <a href="/formularios/resumen-museo" class="list-group-item list-group-item-action">↳ Resumen Histórico</a>
+              <a href="/formularios/empleado-nuevo" class="list-group-item list-group-item-action">↳ Nuevo Empleado</a>
+              <a href="/formularios/pintura-nueva" class="list-group-item list-group-item-action">↳ Pintura</a>
+              <a href="/formularios/escultura-nueva" class="list-group-item list-group-item-action">↳ Escultura</a>
+            </div>
+          </div>
+          <a href="/tickets/venta" class="list-group-item list-group-item-action">Administración de Tickets</a>
+          <a href="/historiales-mantenimientos/registrar" class="list-group-item list-group-item-action">Historial Mantenimiento</a>
         </div>
       </aside>
 
-      <!-- Contenido a la derecha -->
+      <!-- Contenido principal a la derecha -->
       <section class="col-md-9">
         <div class="row g-4">
           <div class="col-md-6">
@@ -59,52 +112,117 @@
               <div class="card-body">
                 <h5 class="card-title">Recursos Humanos</h5>
                 <p class="card-text">Gestión de empleados, asignaciones, y roles de trabajo.</p>
-                <a href="/views/empleados-profesionales/listar.html" class="btn btn-outline-primary">Entrar</a>
+                <a href="/empleados-profesionales/listar" class="btn btn-outline-primary">Entrar</a>
               </div>
             </div>
           </div>
+
+          <!-- Estructura del Museo con dropdown -->
           <div class="col-md-6">
             <div class="card h-100 shadow-sm">
               <div class="card-body">
                 <h5 class="card-title">Estructura del Museo</h5>
-                <p class="card-text">Información de la estructura física y organizacional del museo.</p>
-                <a href="/views/estructuras/fisicas.html" class="btn btn-outline-primary">Entrar</a>
+                <p class="card-text">Información sobre la estructura física y organizacional del museo.</p>
+                <div class="dropdown">
+                  <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                    Ver opciones
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/estructuras/fisicas">Estructura Física</a></li>
+                    <li><a class="dropdown-item" href="/estructuras/organizacionales">Estructura Organizacional</a></li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
+
+          <!-- Otras tarjetas -->
           <div class="col-md-6">
             <div class="card h-100 shadow-sm">
               <div class="card-body">
                 <h5 class="card-title">Obras de Arte</h5>
-                <p class="card-text">Registro de obras, colecciones y mantenimiento especializado.</p>
-                <a href="/views/obras/registrar.html" class="btn btn-outline-primary">Entrar</a>
+                <p class="card-text">Registro y gestión de obras de arte del.</p>
+                <a href="/obras/registrar" class="btn btn-outline-primary">Entrar</a>
               </div>
             </div>
           </div>
+
+          <div class="col-md-6">
+            <div class="card h-100 shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title">Artistas</h5>
+                <p class="card-text">Registro y gestión de artistas y sus características.</p>
+                <a href="/artistas" class="btn btn-outline-primary">Entrar</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="card h-100 shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title">Colecciones</h5>
+                <p class="card-text">Registro y gestión de las colecciones del museo.</p>
+                <a href="/colecciones" class="btn btn-outline-primary">Entrar</a>
+              </div>
+            </div>
+          </div>
+
           <div class="col-md-6">
             <div class="card h-100 shadow-sm">
               <div class="card-body">
                 <h5 class="card-title">Eventos y Exposiciones</h5>
                 <p class="card-text">Planificación y ejecución de eventos y exposiciones especiales.</p>
-                <a href="/views/eventos/registrar.html" class="btn btn-outline-primary">Entrar</a>
+                <a href="/eventos/registrar" class="btn btn-outline-primary">Entrar</a>
               </div>
             </div>
           </div>
+
+          <div class="col-md-6">
+            <div class="card h-100 shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title">Salas de Exposición</h5>
+                <p class="card-text">Registro y gestión de salas donde se realizan las exposiciones.</p>
+                <a href="/salas-exposiciones/listar" class="btn btn-outline-primary">Entrar</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="card h-100 shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title">Formularios del Museo</h5>
+                <p class="card-text">Accede a formularios para registrar datos históricos, obras y personal.</p>
+                <div class="dropdown">
+                  <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                    Ver Formularios
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/formularios/resumen-museo">Resumen Histórico</a></li>
+                    <li><a class="dropdown-item" href="/formularios/empleado-nuevo">Nuevo Empleado</a></li>
+                    <li><a class="dropdown-item" href="/formularios/pintura-nueva">Pintura</a></li>
+                    <li><a class="dropdown-item" href="/formularios/escultura-nueva">Escultura</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div class="col-md-6">
             <div class="card h-100 shadow-sm">
               <div class="card-body">
                 <h5 class="card-title">Administración de Tickets</h5>
                 <p class="card-text">Venta y tipos de entradas para visitantes al museo.</p>
-                <a href="/views/tickets/venta.html" class="btn btn-outline-primary">Entrar</a>
+                <a href="/tickets/venta" class="btn btn-outline-primary">Entrar</a>
               </div>
             </div>
           </div>
+
           <div class="col-md-6">
             <div class="card h-100 shadow-sm">
               <div class="card-body">
                 <h5 class="card-title">Historial Mantenimiento</h5>
                 <p class="card-text">Gestión del mantenimiento de instalaciones y obras.</p>
-                <a href="/views/mantenimientos/registrar.html" class="btn btn-outline-primary">Entrar</a>
+                <a href="/historiales-mantenimientos/registrar" class="btn btn-outline-primary">Entrar</a>
               </div>
             </div>
           </div>
