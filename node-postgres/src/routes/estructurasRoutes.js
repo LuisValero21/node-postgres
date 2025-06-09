@@ -1,20 +1,14 @@
 const express = require('express');
+const path = require('path');
 const router = express.Router();
 const estructurasController = require('../controllers/estructurasController');
 
-// Obtener todas las estructuras
-router.get('/', estructurasController.getAllEstructuras);
+router.get('/fisicas', (req, res) => {
+  res.sendFile(path.join(__dirname, '../views/estructuras/fisicas.html'));
+});
 
-// Obtener una estructura por ID
-router.get('/:id', estructurasController.getEstructuraById);
-
-// Crear una nueva estructura
-router.post('/', estructurasController.createEstructura);
-
-// Actualizar una estructura existente
-router.put('/:id', estructurasController.updateEstructura);
-
-// Eliminar una estructura
-router.delete('/:id', estructurasController.deleteEstructura);
+router.get('/organizacionales', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../views/estructuras/organizacionales.html'));
+});
 
 module.exports = router;

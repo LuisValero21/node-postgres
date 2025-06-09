@@ -2,12 +2,14 @@ const express = require('express');
 const router = express.Router();
 const ticketsController = require('../controllers/ticketsController');
 
-// Venta de tickets
-router.get('/ventas', ticketsController.renderVentaTicket);
-router.post('/ventas', ticketsController.venderTicket);
+// Formulario de venta
+router.get('/venta', ticketsController.renderVentaTicket);
+router.post('/venta', ticketsController.venderTicket);
 
-// Tipos de ticket
+// Formulario de tipos de tickets
 router.get('/tipos', ticketsController.renderTiposTicket);
 router.post('/tipos', ticketsController.crearTipoTicket);
+
+router.get('/historial', ticketsController.renderHistorialTickets);
 
 module.exports = router;
