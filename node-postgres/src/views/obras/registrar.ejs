@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registrar Obra de Arte</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f9f9f9;
+    }
+
+    .container {
+      max-width: 900px;
+      margin-top: 50px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 40px;
+      font-weight: 600;
+    }
+
+    .form-label {
+      font-weight: 500;
+    }
+
+    .form-control,
+    .form-select {
+      width: 100%;
+      padding: 14px;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    textarea {
+      resize: none;
+    }
+
+    .btn-group-left {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .btn {
+      padding: 8px 20px;
+      font-size: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Registrar Obra de Arte</h2>
+    <form action="/obras/registrar" method="POST">
+      <div class="mb-3">
+        <label for="nombre_obra" class="form-label">Nombre de la Obra</label>
+        <input type="text" class="form-control" id="nombre_obra" name="nombre_obra" required maxlength="50">
+      </div>
+
+      <div class="mb-3">
+        <label for="fecha_elaboracion_obra" class="form-label">Fecha de Elaboración</label>
+        <input type="date" class="form-control" id="fecha_elaboracion_obra" name="fecha_elaboracion_obra" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="dimensiones_obra" class="form-label">Dimensiones</label>
+        <input type="text" class="form-control" id="dimensiones_obra" name="dimensiones_obra" required maxlength="20">
+      </div>
+
+      <div class="mb-3">
+        <label for="tipo_obra" class="form-label">Tipo de Obra</label>
+        <select class="form-select" id="tipo_obra" name="tipo_obra" required>
+          <option value="">Seleccione</option>
+          <option value="pintura">Pintura</option>
+          <option value="escultura">Escultura</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="caracteristicas_estilo_movimiento_obra" class="form-label">Estilo / Movimiento</label>
+        <input type="text" class="form-control" id="caracteristicas_estilo_movimiento_obra" name="caracteristicas_estilo_movimiento_obra" required maxlength="50">
+      </div>
+
+      <div class="mb-3">
+        <label for="caracteristicas_tecnicas_manteriales_obra" class="form-label">Técnicas / Materiales</label>
+        <input type="text" class="form-control" id="caracteristicas_tecnicas_manteriales_obra" name="caracteristicas_tecnicas_manteriales_obra" required maxlength="50">
+      </div>
+
+      <!-- Botones -->
+      <div class="btn-group-left">
+        <button type="submit" class="btn btn-primary">Guardar Obra</button>
+        <a href="/obras" class="btn btn-secondary">Cancelar</a>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
