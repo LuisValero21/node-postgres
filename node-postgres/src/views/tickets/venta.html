@@ -13,8 +13,10 @@
     <form id="formVentaTicket">
       <div class="mb-3">
         <label for="tipoTicket" class="form-label">Tipo de Ticket</label>
-        <select class="form-select" id="tipoTicket" name="tipo_ticket" required>
-          <!-- Cargar tipos de tickets dinámicamente -->
+        <select class="form-select" id="tipoTicket" name="tipo_entrada_ticket" required>
+          <% tipos.forEach(tipo => { %>
+            <option value="<%= tipo.tipo_tipo_ticket %>"><%= tipo.tipo_tipo_ticket %></option>
+          <% }) %>
         </select>
       </div>
       <div class="mb-3">
@@ -30,7 +32,7 @@
         <input type="text" class="form-control" id="monto" name="monto" readonly>
       </div>
       <button type="submit" class="btn btn-success">Vender Ticket</button>
-      <a href="/views/index.html" class="btn btn-secondary">Cancelar</a>
+      <a href="/" class="btn btn-secondary">Cancelar</a>
     </form>
   </div>
   <script src="/js/tickets/venta.js"></script>
