@@ -11,7 +11,7 @@ exports.formCrearEmpleadoProfesional = (req, res) => {
 
 exports.crearEmpleadoProfesional = async (req, res) => {
   await EmpleadoProfesional.insertar(req.body);
-  res.redirect('/empleados-profesionales');
+  res.redirect('/empleados-profesionales/crear');
 };
 
 exports.formEditarEmpleadoProfesional = async (req, res) => {
@@ -21,10 +21,10 @@ exports.formEditarEmpleadoProfesional = async (req, res) => {
 
 exports.editarEmpleadoProfesional = async (req, res) => {
   await EmpleadoProfesional.actualizar(req.params.id, req.body);
-  res.redirect('/empleados-profesionales');
+  res.redirect('/empleados-profesionales/editar');
 };
 
 exports.eliminarEmpleadoProfesional = async (req, res) => {
   await EmpleadoProfesional.eliminar(req.params.id);
-  res.redirect('/empleados-profesionales');
+  res.redirect('/empleados-profesionales/eliminar');
 };

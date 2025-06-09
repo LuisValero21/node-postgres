@@ -1,3 +1,4 @@
+const path = require('path');
 const db = require('../db');
 
 module.exports = {
@@ -16,25 +17,38 @@ module.exports = {
   },
 
   async crearObra(req, res) {
-    const {
-      titulo,
-      autor,
-      año_creacion,
-      tipo,
-      tecnica,
-      descripcion,
-      id_coleccion
-    } = req.body;
-    try {
-      await db.query(
-        `INSERT INTO obras (titulo, autor, año_creacion, tipo, tecnica, descripcion, id_coleccion)
-         VALUES ($1, $2, $3, $4, $5, $6, $7)`,
-        [titulo, autor, año_creacion, tipo, tecnica, descripcion, id_coleccion]
-      );
-      res.status(201).send('Obra registrada correctamente.');
-    } catch (err) {
-      console.error('Error al registrar obra:', err);
-      res.status(500).send('Error al registrar obra.');
+  const {
+    nombre_obra,
+    fecha_elaboracion_obra,
+    dimensiones_obra,
+    tipo_obra,
+    caracteristicas_estilo_movimiento_obra,
+    caracteristicas_tecnicas_manteriales_obra
+  } = req.body;
+
+  try {
+    await db.query(
+      `INSERT INTO obras (
+        nombre_obra,
+        fecha_elaboracion_obra,
+        dimensiones_obra,
+        tipo_obra,
+        caracteristicas_estilo_movimiento_obra,
+        caracteristicas_tecnicas_manteriales_obra
+      ) VALUES ($1, $2, $3, $4, $5, $6)`,
+      [
+        nombre_obra,
+        fecha_elaboracion_obra,
+        dimensiones_obra,
+        tipo_obra,
+        caracteristicas_estilo_movimiento_obra,
+        caracteristicas_tecnicas_manteriales_obra
+      ]
+    );
+    res.status(201).send('Obra registrada correctamente.');
+  } catch (err) {
+    console.error('Error al registrar obra:', err);
+    res.status(500).send('Error al registrar obra.');
     }
   },
 

@@ -3,7 +3,7 @@ const pool = require('../db');
 // Mostrar formulario de venta de tickets
 exports.renderVentaTicket = async (req, res) => {
   try {
-    const tipos = await pool.query('SELECT * FROM tipos_tickets');
+    const tipos = await pool.query('SELECT DISTINCT tipo_tipo_ticket FROM tipos_tickets');
     res.render('tickets/venta', { tipos: tipos.rows });
   } catch (err) {
     console.error('Error al cargar formulario de venta:', err);
@@ -51,5 +51,16 @@ exports.crearTipoTicket = async (req, res) => {
   } catch (err) {
     console.error('Error al registrar tipo de ticket:', err);
     res.status(500).send('Error al registrar tipo de ticket');
+  }
+};
+
+// Mostrar historial de ventas
+exports.renderHistorialTickets = async (req, res) => {
+  try {
+    const result = await pool.query('SELECT * FROM tickets ORDER BY fecha_hora_venta_ticket DESC');
+    res.render('tickets/historial', { tickets: result.rows });
+  } catch (err) {
+    console.error('Error al obtener historial:', err);
+    res.status(500).send('Error al cargar el historial de tickets');
   }
 };

@@ -1,25 +1,48 @@
 const pool = require('../db');
 
-// Renderizar formulario para registrar eventos
+// Renderiza el formulario
 exports.renderRegistrarEvento = async (req, res) => {
   try {
-    const obras = await pool.query('SELECT id_obra, titulo FROM obras');
-    res.render('eventos/registrar', { obras: obras.rows });
+    res.sendFile(require('path').join(__dirname, '../views/eventos/registrar.html'));
   } catch (error) {
     console.error('Error al cargar formulario de eventos:', error);
     res.status(500).send('Error interno del servidor');
   }
 };
 
-// Guardar un nuevo evento en la base de datos
+// Insertar evento
 exports.crearEvento = async (req, res) => {
-  const { titulo, fecha_inicio, fecha_fin, descripcion, id_obra } = req.body;
+  const {
+    titulo_evento,
+    fecha_inicio_evento,
+    fecha_fin_evento,
+    costo_evento,
+    cantidad_personas_invitadas_evento,
+    nombre_instituto_evento
+  } = req.body;
+
   try {
+    // Asignación temporal del id_museo_evento (en implementación final, debería provenir del usuario autenticado o contexto)
+    const id_museo_evento = 1;
+
     await pool.query(
-      `INSERT INTO eventos (titulo, fecha_inicio, fecha_fin, descripcion, id_obra)
-       VALUES ($1, $2, $3, $4, $5)`,
-      [titulo, fecha_inicio, fecha_fin, descripcion, id_obra]
+      `INSERT INTO eventos (
+        id_evento, id_museo_evento, titulo_evento, fecha_inicio_evento,
+        fecha_fin_evento, costo_evento, cantidad_personas_invitadas_evento, nombre_instituto_evento
+      ) VALUES (
+        DEFAULT, $1, $2, $3, $4, $5, $6, $7
+      )`,
+      [
+        id_museo_evento,
+        titulo_evento,
+        fecha_inicio_evento,
+        fecha_fin_evento,
+        costo_evento || null,
+        cantidad_personas_invitadas_evento || null,
+        nombre_instituto_evento || null
+      ]
     );
+
     res.redirect('/eventos/historial');
   } catch (error) {
     console.error('Error al crear evento:', error);
@@ -27,15 +50,10 @@ exports.crearEvento = async (req, res) => {
   }
 };
 
-// Listar eventos pasados y futuros
+// Listar eventos
 exports.historialEventos = async (req, res) => {
   try {
-    const eventos = await pool.query(`
-      SELECT e.*, o.titulo AS titulo_obra
-      FROM eventos e
-      LEFT JOIN obras o ON e.id_obra = o.id_obra
-      ORDER BY e.fecha_inicio DESC
-    `);
+    const eventos = await pool.query(`SELECT * FROM eventos ORDER BY fecha_inicio_evento DESC`);
     res.render('eventos/historial', { eventos: eventos.rows });
   } catch (error) {
     console.error('Error al listar historial de eventos:', error);

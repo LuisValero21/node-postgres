@@ -1,3 +1,4 @@
+const path = require('path');
 const estructurasModel = require('../models/estructurasModel');
 
 exports.getAllEstructuras = async (req, res) => {
@@ -46,4 +47,12 @@ exports.deleteEstructura = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: 'Error al eliminar la estructura' });
   }
+};
+
+exports.listarFisicas = (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../views/estructuras/fisicas.html'));
+};
+
+exports.listarOrganizacionales = (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../views/estructuras/organizacionales.html'));
 };
