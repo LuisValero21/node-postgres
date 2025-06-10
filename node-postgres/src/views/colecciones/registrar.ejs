@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Registrar Colección</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="container mt-4">
+    <h2>Registrar Colección</h2>
+    <form method="POST" action="/colecciones/registrar">
+      <div class="mb-3">
+        <label class="form-label">Nombre de la colección</label>
+        <input type="text" class="form-control" name="nombre_coleccion" required />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Descripción / Características</label>
+        <textarea class="form-control" name="descripcion_caracteristica_coleccion" rows="3" required></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Estructura Organizacional</label>
+        <select class="form-select" name="id_estruc_orga_coleccion" required>
+          <% estructuras.forEach(estruc => { %>
+            <option value="<%= estruc.id_estruc_estructura_organizacional %>">
+              ID Estructura: <%= estruc.id_estruc_estructura_organizacional %>
+            </option>
+          <% }) %>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Museo</label>
+        <select class="form-select" name="id_museo_coleccion" required>
+          <% estructuras.forEach(estruc => { %>
+            <option value="<%= estruc.id_museo_estructura_organizacional %>">
+              Museo: <%= estruc.id_museo_estructura_organizacional %>
+            </option>
+          <% }) %>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Guardar Colección</button>
+    </form>
+  </div>
+</body>
+</html>

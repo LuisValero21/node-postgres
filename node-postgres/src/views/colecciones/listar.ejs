@@ -1,1 +1,36 @@
-
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lista de Colecciones</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="container mt-4">
+    <h2>Colecciones Registradas</h2>
+    <a href="/colecciones/registrar" class="btn btn-success mb-3">Nueva Colección</a>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>ID Estructura</th>
+          <th>ID Museo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% colecciones.forEach(c => { %>
+          <tr>
+            <td><%= c.id_coleccion %></td>
+            <td><%= c.nombre_coleccion %></td>
+            <td><%= c.descripcion_caracteristica_coleccion %></td>
+            <td><%= c.id_estruc_orga_coleccion %></td>
+            <td><%= c.id_museo_coleccion %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
